@@ -1,15 +1,14 @@
 package kr.co.doritos.todoservice.entity;
 
 import kr.co.doritos.todoservice.common.TodoStatus;
+import kr.co.doritos.todoservice.dto.TodoDTO;
 import lombok.*;
-
 import javax.persistence.*;
 
-@Entity
 @Getter
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Builder
 public class Todo {
 
@@ -25,5 +24,15 @@ public class Todo {
     private TodoStatus status;
 
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
+
+    public TodoDTO toDTO() {
+        return TodoDTO.builder()
+                .id(this.id)
+                .todo(this.todo)
+                .status(this.status)
+                .member(this.member.toDto())
+                .build();
+    }
 }

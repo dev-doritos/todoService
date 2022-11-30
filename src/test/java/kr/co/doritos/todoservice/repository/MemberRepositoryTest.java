@@ -31,7 +31,6 @@ class MemberRepositoryTest {
                 .email("wognsl34@daum.net")
                 .password("12345")
                 .status(UseStatus.Y)
-                .todoList(new ArrayList<Todo>())
                 .build();
 
         // when

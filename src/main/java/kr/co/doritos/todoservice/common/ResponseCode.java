@@ -5,7 +5,7 @@ public enum ResponseCode {
     Success("0000", "Success"),
 
     E4001("4001", "데이터 조회 실패"),
-    E5001("5001", "Unknown Error"),
+    E5001("5001", "System Error"),
     ;
 
     private final String code;

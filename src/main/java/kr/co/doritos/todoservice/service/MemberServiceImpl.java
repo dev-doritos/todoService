@@ -8,6 +8,7 @@ import kr.co.doritos.todoservice.exception.TodoException;
 import kr.co.doritos.todoservice.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,18 +64,21 @@ public class MemberServiceImpl implements  MemberService {
     }
 
     @Override
+    @Transactional
     public MemberDTO save(MemberDTO memberDTO) {
         Member member = memberRepository.save(memberDTO.toEntity());
         return member.toDto();
     }
 
     @Override
+    @Transactional
     public MemberDTO update(MemberDTO memberDTO) {
         Member member = memberRepository.save(memberDTO.toEntity());
         return member.toDto();
     }
 
     @Override
+    @Transactional
     public void deleteById(long id) {
         memberRepository.deleteById(id);
     }

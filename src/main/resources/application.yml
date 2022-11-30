@@ -6,6 +6,14 @@ spring:
     console:
       enabled: true
 
+  devtools:
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+
   datasource :
     driver-class-name : org.h2.Driver
     url : jdbc:h2:mem:test
