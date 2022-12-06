@@ -2,6 +2,7 @@ package kr.co.doritos.todoservice.repository;
 
 import kr.co.doritos.todoservice.common.TodoStatus;
 import kr.co.doritos.todoservice.entity.Todo;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,6 @@ class TodoRepositoryTest {
         // then
         assertEquals(todo, todo1);
         assertNotNull(todo2);
-        //assertEquals(todo1, todo2);
-        assertEquals(todoList.size(), 1);
 
         System.err.println(todoList);
     }

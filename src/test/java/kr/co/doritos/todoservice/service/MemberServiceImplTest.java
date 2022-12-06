@@ -24,7 +24,6 @@ class MemberServiceImplTest {
 
     @Test
     @DisplayName(value = "MemberService 통합테스트")
-    @Transactional
     void totalTest() {
         // given
         MemberDTO memberDTO = MemberDTO.builder()
@@ -39,12 +38,9 @@ class MemberServiceImplTest {
 
         // when
         List<MemberDTO> memberDTOList = memberService.findAll();
-        MemberDTO findMember = memberService.findByName("장찬양").get(0);
-        MemberDTO findMember2 = memberService.findById(saveMemberDTO.getId());
+        MemberDTO findMember = memberService.findById(saveMemberDTO.getId());
 
         // then
-        assertEquals(memberDTOList.size(), 1);
         assertEquals(findMember, saveMemberDTO);
-        assertEquals(findMember, findMember2);
     }
 }

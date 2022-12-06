@@ -41,20 +41,20 @@
                             <th scope="col">상태</th>
                             <td>
                                 <select name="status" class="form-select form-select-sm">
-                                    <option th:each="status : ${todoStatus}" th:value="${status.code}" th:text="${status.desc}" th:selected="${status.code == todoDTO.status.code}"></option>
+                                    <option th:each="status : ${todoStatus}" th:value="${status.code}" th:text="${status.desc}"></option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th scope="col">기한</th>
                             <td>
-                                <input type="date" th:value="${#temporals.createDate(todoDTO.deadline, 'yyyyMMdd')}" name="deadline" class="form-control">
+                                <input type="date" name="deadline" class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <th scope="col">Todo</th>
                             <td>
-                                <textarea th:value="${todoDTO.todo}" th:text="${todoDTO.todo}" name="todo" class="form-control" style="height: 300px;"></textarea>
+                                <textarea name="todo" class="form-control" style="height: 300px;"></textarea>
                             </td>
                         </tr>
                     </table>
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-12" style="text-align: right">
                             <button class="btn btn-primary" id="listButton">목록</button>
-                            <button class="btn btn-danger" id="updateButton">수정</button>
+                            <button class="btn btn-danger" id="registButton">등록</button>
                         </div>
                     </div>
                 </div>
@@ -75,14 +75,13 @@
     <script th:inline="javascript">
         const Todo = /*[[${todoDTO}]]*/ '';
         const listButton = document.querySelector('#listButton');
-        const updateButton = document.querySelector('#updateButton');
+        const registButton = document.querySelector('#registButton');
 
         listButton.addEventListener('click', () => {
-            location.href = '../todoList';
+            location.href = './todoList';
         });
 
-        updateButton.addEventListener('click', fnUpdate);
-
+        registButton.addEventListener('click', fnRegist);
     </script>
 </body>
 </html>

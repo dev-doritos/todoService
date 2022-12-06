@@ -2,24 +2,23 @@ package kr.co.doritos.todoservice.common;
 
 public enum UserRole {
 
-    Admin("Admin", "관리자"),
-    Manager("Manager", "운영자"),
-    General("General", "일반"),
+    ADMIN("ADMIN", "관리자"),
+    GENERAL("GENERAL", "일반"),
     ;
 
-    private final String role;
-    private final String roleDesc;
+    private final String code;
+    private final String desc;
 
-    UserRole(String role, String roleDesc) {
-        this.role = role;
-        this.roleDesc = roleDesc;
+    UserRole(String code, String desc) {
+        this.code = code;
+        this.desc = desc;
     }
 
-    public String getRole() {
-        return this.role;
+    public String getCode() {
+        return this.code;
     }
 
-    public String getRoleDesc() {
-        return this.roleDesc;
+    public String getDesc() {
+        return this.desc;
     }
 }

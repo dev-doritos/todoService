@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TodoService</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -10,7 +10,7 @@
 <body>
     <!-- Header -->
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="javascript:;">TodoService</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/office">TodoService</a>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="#">Sign out</a>
@@ -25,10 +25,10 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">회원 관리</a>
+                            <a class="nav-link" aria-current="page" href="/office/memberList">회원 관리</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">TodoList 관리</a>
+                            <a class="nav-link active" href="/office/todoList">TodoList 관리</a>
                         </li>
                     </ul>
                 </div>
@@ -47,36 +47,49 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="todo : ${todoDTOList}" th:data="${todo.id}" class="todoRows" style="cursor: pointer">
-                                <td th:text="${todo.id}"></td>
-                                <td th:text="${todo.status.message}"></td>
-                                <td th:text="${todo.todo}"></td>
-                                <td th:text="${todo.member.email}"></td>
-                                <td th:text="${todo.member.userRole.roleDesc}"></td>
+                            <tr th:each="todoDTO, index : ${todoDTOList}" th:data="${todoDTO.id}" class="viewRows" style="cursor: pointer">
+                                <td th:text="${index.index}"></td>
+                                <td th:text="${todoDTO.status.desc}"></td>
+                                <td th:text="${todoDTO.todo}"></td>
+                                <td th:text="${todoDTO.member.email}"></td>
+                                <td th:text="${todoDTO.member.userRole.desc}"></td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-12" style="text-align: right">
+                            <button class="btn btn-primary" id="registButton">등록</button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
     </div>
 
     <script th:inline="javascript">
-        const todoRows = document.querySelectorAll('.todoRows');
+        const viewRows      = document.querySelectorAll('.viewRows');
+        const registButton  = document.querySelector('#registButton');
 
-        todoRows.forEach(e => e.addEventListener('click', fnViewTodo));
+        viewRows.forEach(e => e.addEventListener('click', fnViewTodo));
+        registButton.addEventListener('click', fnRegist);
 
         let target = null;
 
         function fnViewTodo(event) {
             target = event.target;
 
-            if (target.parentElement.classList.contains('todoRows')) {
+            if (target.parentElement.classList.contains('viewRows')) {
                 target = target.parentElement;
             }
             const todoId = target.getAttribute('data');
 
             location.href = `./todo/${todoId}`;
+        }
+
+        function fnRegist() {
+            location.href = './todo';
         }
     </script>
 </body>

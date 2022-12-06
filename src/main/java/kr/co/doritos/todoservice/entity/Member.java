@@ -28,7 +28,7 @@ public class Member {
     private UseStatus status;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 7)
+    @Column(length = 20)
     private UserRole userRole;
 
     private String email;

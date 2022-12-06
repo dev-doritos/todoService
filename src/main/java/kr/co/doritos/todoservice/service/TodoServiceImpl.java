@@ -64,6 +64,11 @@ public class TodoServiceImpl implements TodoService {
         todoRepository.deleteById(id);
     }
 
+    @Override
+    public boolean existsById(long id) {
+        return todoRepository.existsById(id);
+    }
+
     private List<TodoDTO> toMemberDTOList(List<Todo> todoList) {
         return todoList.stream()
                 .map(Todo::toDTO)

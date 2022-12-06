@@ -14,6 +14,7 @@ public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "todo_id")
     private long id;
 
     @Column(length = 4000)
@@ -23,6 +24,7 @@ public class Todo {
     @Column(length = 10)
     private TodoStatus status;
 
+    private String deadline;
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -32,6 +34,7 @@ public class Todo {
                 .id(this.id)
                 .todo(this.todo)
                 .status(this.status)
+                .deadline(this.deadline)
                 .member(this.member.toDto())
                 .build();
     }

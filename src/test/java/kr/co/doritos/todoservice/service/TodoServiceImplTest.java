@@ -4,6 +4,7 @@ import kr.co.doritos.todoservice.common.TodoStatus;
 import kr.co.doritos.todoservice.common.UseStatus;
 import kr.co.doritos.todoservice.dto.MemberDTO;
 import kr.co.doritos.todoservice.dto.TodoDTO;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,6 @@ public class TodoServiceImplTest {
         TodoDTO saveTodoDTO = todoService.save(todoDTO);
 
         // when
-        List<TodoDTO> todoDTOList = todoService.findAll();
         TodoDTO findTodo = todoService.findById(saveTodoDTO.getId());
 
         // then

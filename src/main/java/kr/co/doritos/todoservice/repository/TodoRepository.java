@@ -13,8 +13,7 @@ import java.util.List;
 public interface TodoRepository extends CrudRepository<Todo, Long> {
 
     public List<Todo> findAllByOrderByIdDesc();
-
     public List<Todo> findByStatus(TodoStatus status);
-
     public List<Todo> findByMember(Member member);
+    public boolean existsById(long id);
 }

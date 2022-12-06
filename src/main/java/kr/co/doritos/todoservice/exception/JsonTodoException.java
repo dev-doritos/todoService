@@ -4,28 +4,28 @@ import kr.co.doritos.todoservice.common.ResponseCode;
 import lombok.Getter;
 
 @Getter
-public class TodoException extends RuntimeException {
+public class JsonTodoException extends RuntimeException {
 
     private ResponseCode code;
     private String message;
 
-    public TodoException() {
+    public JsonTodoException() {
         super();
     }
 
-    public TodoException(ResponseCode code) {
+    public JsonTodoException(ResponseCode code) {
         super();
         this.code = code;
         this.message = code.getDesc();
     }
 
-    public TodoException(ResponseCode code, String message) {
+    public JsonTodoException(ResponseCode code, String message) {
         super();
         this.code = code;
         this.message = message;
     }
 
-    public TodoException(Throwable t) {
+    public JsonTodoException(Throwable t) {
         super(t);
         this.code = ResponseCode.E5001;
         this.message = t.getMessage();

@@ -17,4 +17,6 @@ public interface MemberService {
     public MemberDTO update(MemberDTO memberDTO);
     public void deleteById(long id);
 
+    public boolean existsById(long id);
+
 }

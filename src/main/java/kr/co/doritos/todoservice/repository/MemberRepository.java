@@ -12,4 +12,6 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
 
     public List<Member> findByStatus(UseStatus status);
     public List<Member> findByName(String name);
+
+    public boolean existsById(long id);
 }

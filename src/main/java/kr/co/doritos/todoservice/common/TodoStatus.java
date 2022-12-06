@@ -7,19 +7,19 @@ public enum TodoStatus {
     Done("Done", "완료"),
     ;
 
-    private final String status;
-    private final String message;
+    private final String code;
+    private final String desc;
 
-    TodoStatus(String status, String message) {
-        this.status = status;
-        this.message = message;
+    TodoStatus(String code, String desc) {
+        this.code = code;
+        this.desc = desc;
     }
 
-    public String getStatus() {
-        return this.status;
+    public String getCode() {
+        return this.code;
     }
 
-    public String getMessage() {
-        return this.message;
+    public String getDesc() {
+        return this.desc;
     }
 }

@@ -16,4 +16,6 @@ public interface TodoService {
     public TodoDTO save(TodoDTO todoDTO);
     public TodoDTO update(TodoDTO todoDTO);
     public void deleteById(long id);
+
+    public boolean existsById(long id);
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoService</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/office">TodoService</a>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#">Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/office/memberList">회원 관리</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/office/todoList">TodoList 관리</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <tr>
+                            <th scope="col">E-mail</th>
+                            <td>
+                                <input type="email" name="email" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">PassWord</th>
+                            <td>
+                                <input type="password" name="password" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">PassWord 확인</th>
+                            <td>
+                                <input type="password" name="password_confirm" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">이름</th>
+                            <td>
+                                <input type="text" name="name" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">성별</th>
+                            <td>
+                                <input type="radio" id="gender_M" name="gender" value="M">
+                                <label for="gender_M">남자</label>
+                                <input type="radio" id="gender_W" name="gender" value="W">
+                                <label for="gender_W">여자</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">권한</th>
+                            <td>
+                                <select name="userRole" class="form-control form-select-sm">
+                                    <option th:each="role : ${userRole}" th:value="${role.code}" th:text="${role.desc}"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">상태</th>
+                            <td>
+                                <select name="status" class="form-select form-select-sm">
+                                    <option th:each="status : ${useStatus}" th:value="${status.code}" th:text="${status.desc}"></option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-12" style="text-align: right">
+                            <button class="btn btn-primary" id="listButton">목록</button>
+                            <button class="btn btn-danger" id="registButton">등록</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script th:src="@{/js/memberService.js}"></script>
+    <script th:inline="javascript">
+        const listButton = document.querySelector('#listButton');
+        const registButton = document.querySelector('#registButton');
+
+        listButton.addEventListener('click', () => {
+            location.href = './memberList';
+        });
+
+        registButton.addEventListener('click', fnRegist);
+
+    </script>
+</body>
+</html>

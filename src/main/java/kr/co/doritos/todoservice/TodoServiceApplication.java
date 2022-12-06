@@ -12,10 +12,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 @SpringBootApplication
 public class TodoServiceApplication implements CommandLineRunner {
 
@@ -35,9 +31,10 @@ public class TodoServiceApplication implements CommandLineRunner {
         // 테스트를 위한 기본 회원 생성
         MemberDTO doritos = MemberDTO.builder()
                 .name("doritos")
+                .password("123456")
                 .email("wognsl34@gmail.com")
                 .gender("M")
-                .userRole(UserRole.Admin)
+                .userRole(UserRole.ADMIN)
                 .status(UseStatus.Y)
                 .build();
 
@@ -47,6 +44,7 @@ public class TodoServiceApplication implements CommandLineRunner {
         TodoDTO todoDTO = TodoDTO.builder()
                 .todo("First Todo!")
                 .member(saveMember)
+                .deadline("20221205")
                 .status(TodoStatus.Ready)
                 .build();
 

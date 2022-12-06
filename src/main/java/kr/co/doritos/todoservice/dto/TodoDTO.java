@@ -17,6 +17,7 @@ public class TodoDTO {
     private long id;
     private String todo;
     private TodoStatus status;
+    private String deadline;
     private MemberDTO member;
 
     public Todo toEntity() {
@@ -24,6 +25,7 @@ public class TodoDTO {
                 .id(this.id)
                 .todo(this.todo)
                 .status(this.status)
+                .deadline(this.deadline)
                 .member(this.member.toEntity())
                 .build();
     }
