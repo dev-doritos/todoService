@@ -10,8 +10,7 @@ import kr.co.doritos.todoservice.exception.JsonTodoException;
 import kr.co.doritos.todoservice.service.MemberService;
 import kr.co.doritos.todoservice.service.TodoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,12 +30,12 @@ public class TodoController {
         this.memberService = memberService;
     }
     
-    @GetMapping(value = "/todoList")
+    @GetMapping(value = "/todo/list")
     public ModelAndView toTodoListPage(HttpServletRequest request) {
 
         String ip = request.getRemoteAddr();
 
-        log.info("[{}][office] todoList 페이지 접근", ip);
+        log.info("[{}][office] todo/list 페이지 접근", ip);
 
         ModelAndView mav = new ModelAndView();
 
@@ -89,7 +88,7 @@ public class TodoController {
 
     @PostMapping(value = "/todo")
     @ResponseBody
-    public String toRegistTodo(HttpServletRequest request, @RequestBody TodoDTO todoDTO) {
+    public String toRegistTodo(HttpServletRequest request, @RequestBody TodoDTO todoDTO) throws JsonProcessingException {
 
         String ip = request.getRemoteAddr();
 
@@ -111,21 +110,16 @@ public class TodoController {
 
         JSONObject response = new JSONObject();
 
-        try {
-            response.put("res_cd", ResponseCode.Success.getCode());
-            response.put("res_msg", ResponseCode.Success.getDesc());
-            response.put("res_data", new ObjectMapper().writeValueAsString(saveTodoDTO));
-        } catch (JSONException | JsonProcessingException e) {
-            e.printStackTrace();
-            throw new JsonTodoException(ResponseCode.E5001);
-        }
+        response.put("res_cd", ResponseCode.Success.getCode());
+        response.put("res_msg", ResponseCode.Success.getDesc());
+        response.put("res_data", new ObjectMapper().writeValueAsString(saveTodoDTO));
 
         return response.toString();
     }
 
     @PutMapping(value = "/todo/{id}")
     @ResponseBody
-    public String toUpdateTodo(HttpServletRequest request, @PathVariable(value = "id") String id, @RequestBody TodoDTO todoDTO) {
+    public String toUpdateTodo(HttpServletRequest request, @PathVariable(value = "id") String id, @RequestBody TodoDTO todoDTO) throws JsonProcessingException {
         
         String ip = request.getRemoteAddr();
 
@@ -147,14 +141,9 @@ public class TodoController {
 
         JSONObject response = new JSONObject();
 
-        try {
-            response.put("res_cd", ResponseCode.Success.getCode());
-            response.put("res_msg", ResponseCode.Success.getDesc());
-            response.put("res_data", new ObjectMapper().writeValueAsString(saveTodoDTO));
-        } catch (JSONException | JsonProcessingException e) {
-            e.printStackTrace();
-            throw new JsonTodoException(ResponseCode.E5001);
-        }
+        response.put("res_cd", ResponseCode.Success.getCode());
+        response.put("res_msg", ResponseCode.Success.getDesc());
+        response.put("res_data", new ObjectMapper().writeValueAsString(saveTodoDTO));
 
         return response.toString();
     }

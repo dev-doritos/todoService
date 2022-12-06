@@ -9,8 +9,7 @@ import kr.co.doritos.todoservice.dto.MemberDTO;
 import kr.co.doritos.todoservice.exception.JsonTodoException;
 import kr.co.doritos.todoservice.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,12 +27,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping(value = "memberList")
+    @GetMapping(value = "member/list")
     public ModelAndView toMemberListPage(HttpServletRequest request) {
 
         String ip = request.getRemoteAddr();
 
-        log.info("[{}][office] todoList 페이지 접근", ip);
+        log.info("[{}][office] member/list 페이지 접근", ip);
 
         ModelAndView mav = new ModelAndView();
 
@@ -88,7 +87,7 @@ public class MemberController {
 
     @PostMapping(value = "/member")
     @ResponseBody
-    public String toRegistMember(HttpServletRequest request, @RequestBody MemberDTO memberDTO) {
+    public String toRegistMember(HttpServletRequest request, @RequestBody MemberDTO memberDTO) throws JsonProcessingException {
 
         String ip = request.getRemoteAddr();
 
@@ -99,22 +98,16 @@ public class MemberController {
         log.info("[{}][office] member 등록 완료. {}", ip, saveMemberDTO);
 
         JSONObject response = new JSONObject();
-
-        try {
-            response.put("res_cd", ResponseCode.Success.getCode());
-            response.put("res_msg", ResponseCode.Success.getDesc());
-            response.put("res_data", new ObjectMapper().writeValueAsString(saveMemberDTO));
-        } catch (JSONException | JsonProcessingException e) {
-            e.printStackTrace();
-            throw new JsonTodoException(ResponseCode.E5001);
-        }
+        response.put("res_cd", ResponseCode.Success.getCode());
+        response.put("res_msg", ResponseCode.Success.getDesc());
+        response.put("res_data", new ObjectMapper().writeValueAsString(saveMemberDTO));
 
         return response.toString();
     }
 
     @PutMapping(value = "/member/{id}")
     @ResponseBody
-    public String toUpdateMember(HttpServletRequest request, @PathVariable(value = "id") String id, @RequestBody MemberDTO memberDTO) {
+    public String toUpdateMember(HttpServletRequest request, @PathVariable(value = "id") String id, @RequestBody MemberDTO memberDTO) throws JsonProcessingException {
 
         String ip = request.getRemoteAddr();
 
@@ -138,15 +131,9 @@ public class MemberController {
         log.info("[{}][office] member 수정 완료. {}", ip, saveMemberDTO);
 
         JSONObject response = new JSONObject();
-
-        try {
-            response.put("res_cd", ResponseCode.Success.getCode());
-            response.put("res_msg", ResponseCode.Success.getDesc());
-            response.put("res_data", new ObjectMapper().writeValueAsString(saveMemberDTO));
-        } catch (JSONException | JsonProcessingException e) {
-            e.printStackTrace();
-            throw new JsonTodoException(ResponseCode.E5001);
-        }
+        response.put("res_cd", ResponseCode.Success.getCode());
+        response.put("res_msg", ResponseCode.Success.getDesc());
+        response.put("res_data", new ObjectMapper().writeValueAsString(saveMemberDTO));
 
         return response.toString();
     }
