@@ -3,13 +3,8 @@ package kr.co.doritos.todoservice.entity;
 import kr.co.doritos.todoservice.common.UseStatus;
 import kr.co.doritos.todoservice.common.UserRole;
 import kr.co.doritos.todoservice.dto.MemberDTO;
-import kr.co.doritos.todoservice.dto.TodoDTO;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,16 +19,20 @@ public class Member {
     private long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 1)
+    @Column(length = 1, nullable = false)
     private UseStatus status;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private UserRole userRole;
 
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String name;
 
     @Column(length = 1)

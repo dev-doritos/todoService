@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class TodoServiceApplication implements CommandLineRunner {
@@ -21,6 +22,9 @@ public class TodoServiceApplication implements CommandLineRunner {
     @Autowired
     private TodoService todoService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public static void main(String[] args) {
         SpringApplication.run(TodoServiceApplication.class, args);
     }
@@ -28,10 +32,13 @@ public class TodoServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        String orgPassword = "123456";
+        String encPassword = passwordEncoder.encode(orgPassword);
+
         // 테스트를 위한 기본 회원 생성
         MemberDTO doritos = MemberDTO.builder()
                 .name("doritos")
-                .password("123456")
+                .password(encPassword)
                 .email("wognsl34@gmail.com")
                 .gender("M")
                 .userRole(UserRole.ADMIN)

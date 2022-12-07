@@ -21,10 +21,12 @@ public class Todo {
     private String todo;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10)
+    @Column(length = 10, nullable = false)
     private TodoStatus status;
 
+    @Column(nullable = false)
     private String deadline;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -38,4 +40,5 @@ public class Todo {
                 .member(this.member.toDto())
                 .build();
     }
+
 }

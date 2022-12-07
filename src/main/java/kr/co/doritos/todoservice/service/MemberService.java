@@ -13,10 +13,10 @@ public interface MemberService {
     public List<MemberDTO> findByStatus(UseStatus status);
     public List<MemberDTO> findByName(String name);
     public MemberDTO findById(long id);
+    public MemberDTO findByEmail(String email);
     public MemberDTO save(MemberDTO memberDTO);
     public MemberDTO update(MemberDTO memberDTO);
     public void deleteById(long id);
-
     public boolean existsById(long id);
 
 }

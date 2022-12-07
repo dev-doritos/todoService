@@ -27,6 +27,8 @@ public class MemberServiceImpl implements  MemberService {
         return toMemberDTOList(memberList);
     }
 
+
+
     @Override
     public List<MemberDTO> findByStatus(UseStatus status) {
         List<Member> memberList = (List<Member>) memberRepository.findByStatus(status);
@@ -52,6 +54,17 @@ public class MemberServiceImpl implements  MemberService {
     @Override
     public MemberDTO findById(long id) {
         Optional<Member> memberOptional = memberRepository.findById(id);
+
+        if(memberOptional.isEmpty()) {
+            throw new TodoException(ResponseCode.E4001);
+        }
+
+        return memberOptional.get().toDto();
+    }
+
+    @Override
+    public MemberDTO findByEmail(String email) {
+        Optional<Member> memberOptional = memberRepository.findByEmail(email);
 
         if(memberOptional.isEmpty()) {
             throw new TodoException(ResponseCode.E4001);

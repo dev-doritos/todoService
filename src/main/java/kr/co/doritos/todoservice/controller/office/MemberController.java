@@ -48,7 +48,7 @@ public class MemberController {
         return mav;
     }
 
-    @GetMapping(value = "/member/{id}")
+    @GetMapping(value = "member/{id}")
     public ModelAndView toMemberPage(HttpServletRequest request, @PathVariable(name = "id") String id) {
 
         String ip = request.getRemoteAddr();
@@ -85,7 +85,7 @@ public class MemberController {
         return mav;
     }
 
-    @PostMapping(value = "/member")
+    @PostMapping(value = "member")
     @ResponseBody
     public String toRegistMember(HttpServletRequest request, @RequestBody MemberDTO memberDTO) throws JsonProcessingException {
 
@@ -105,7 +105,7 @@ public class MemberController {
         return response.toString();
     }
 
-    @PutMapping(value = "/member/{id}")
+    @PutMapping(value = "member/{id}")
     @ResponseBody
     public String toUpdateMember(HttpServletRequest request, @PathVariable(value = "id") String id, @RequestBody MemberDTO memberDTO) throws JsonProcessingException {
 
