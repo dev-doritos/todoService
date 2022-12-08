@@ -64,7 +64,7 @@
                         <tr>
                             <th scope="col">성별</th>
                             <td>
-                                <input type="radio" id="gender_M" name="gender" value="M">
+                                <input type="radio" id="gender_M" name="gender" value="M" checked="checked">
                                 <label for="gender_M">남자</label>
                                 <input type="radio" id="gender_W" name="gender" value="W">
                                 <label for="gender_W">여자</label>
@@ -74,7 +74,7 @@
                             <th scope="col">권한</th>
                             <td>
                                 <select name="userRole" class="form-control form-select-sm">
-                                    <option th:each="role : ${userRole}" th:value="${role.code}" th:text="${role.desc}"></option>
+                                    <option th:each="role : ${userRole}" th:value="${role.role}" th:text="${role.desc}"></option>
                                 </select>
                             </td>
                         </tr>

@@ -11,19 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class TodoServiceApplication implements CommandLineRunner {
 
-    @Autowired
-    private MemberService memberService;
-
-    @Autowired
-    private TodoService todoService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @Autowired private MemberService memberService;
+    @Autowired private TodoService todoService;
 
     public static void main(String[] args) {
         SpringApplication.run(TodoServiceApplication.class, args);
@@ -32,28 +25,25 @@ public class TodoServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        String orgPassword = "123456";
-        String encPassword = passwordEncoder.encode(orgPassword);
-
-        // 테스트를 위한 기본 회원 생성
+        // 기본 회원 생성
         MemberDTO doritos = MemberDTO.builder()
-                .name("doritos")
-                .password(encPassword)
-                .email("wognsl34@gmail.com")
-                .gender("M")
-                .userRole(UserRole.ADMIN)
-                .status(UseStatus.Y)
-                .build();
+            .name("doritos")
+            .email("doritos@daum.net")
+            .password("123456")
+            .gender("M")
+            .userRole(UserRole.ROLE_ADMIN)
+            .status(UseStatus.Y)
+            .build();
 
         MemberDTO saveMember = memberService.save(doritos);
 
-        // 테스트를 위한 기본 TodoList 생성
+        // 기본 TodoList 생성
         TodoDTO todoDTO = TodoDTO.builder()
-                .todo("First Todo!")
-                .member(saveMember)
-                .deadline("20221205")
-                .status(TodoStatus.Ready)
-                .build();
+            .todo("First Todo!")
+            .member(saveMember)
+            .deadline("20221205")
+            .status(TodoStatus.Ready)
+            .build();
 
         TodoDTO saveTodo = todoService.save(todoDTO);
     }

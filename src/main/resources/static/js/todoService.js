@@ -22,7 +22,7 @@ async function fnRegist() {
         return false;
     }
 
-    const updateUrl = './todo';
+    const updateUrl = './';
     const response = await fetch(updateUrl, {
         method : 'post',
         headers: {
@@ -45,7 +45,7 @@ async function fnRegist() {
     alert('등록되었습니다.');
 
     const res_data = JSON.parse(data.res_data);
-    location.href = `./todo/${res_data.id}`;
+    location.href = `./${res_data.id}`;
 }
 
 async function fnUpdate() {

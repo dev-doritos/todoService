@@ -74,7 +74,7 @@
                             <th scope="col">권한</th>
                             <td>
                                 <select name="userRole" class="form-control form-select-sm">
-                                    <option th:each="role : ${userRole}" th:value="${role.code}" th:text="${role.desc}" th:selected="${role.code == memberDTO.userRole.code}"></option>
+                                    <option th:each="role : ${userRole}" th:value="${role.role}" th:text="${role.desc}" th:selected="${role.role == memberDTO.userRole.role}"></option>
                                 </select>
                             </td>
                         </tr>
@@ -109,6 +109,8 @@
         listButton.addEventListener('click', () => {
             location.href = './list';
         });
+
+        updateButton.addEventListener('click', fnUpdate);
 
     </script>
 </body>

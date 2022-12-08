@@ -27,6 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         Member member = memberRepository.findByEmail(email).get();
 
-        return new User(member.getEmail(), member.getPassword(), AuthorityUtils.createAuthorityList(member.getUserRole().getCode()));
+        // Use 정보 설정(이름, 비밀번호, 권한)
+        return new User(member.getEmail(), member.getPassword(), AuthorityUtils.createAuthorityList(member.getUserRole().getRole()));
     }
 }

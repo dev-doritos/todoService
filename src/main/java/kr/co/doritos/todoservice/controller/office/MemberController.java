@@ -93,6 +93,7 @@ public class MemberController {
 
         log.info("[{}][office] member 등록 접근. {} ", ip, memberDTO);
 
+        // 비밀번호 암호화
         MemberDTO saveMemberDTO = memberService.save(memberDTO);
 
         log.info("[{}][office] member 등록 완료. {}", ip, saveMemberDTO);
@@ -119,14 +120,20 @@ public class MemberController {
             throw new JsonTodoException(ResponseCode.E4001);
         }
 
+        MemberDTO saveMemberDTO = null;
+
         // 비밀번호 변경 하지 않았을 경우,
         if (memberDTO.getPassword() == null || memberDTO.getPassword().equals("")) {
             String orgPassword = memberService.findById(Long.parseLong(id)).getPassword();
-            memberDTO.setPassword(orgPassword);
-            log.info("[{}][office] member 비밀번호 변경하지 않음.", ip);
-        }
 
-        MemberDTO saveMemberDTO = memberService.save(memberDTO);
+            memberDTO.setPassword(orgPassword);
+            saveMemberDTO = memberService.update(memberDTO);
+
+            log.info("[{}][office] member 비밀번호 변경하지 않음.", ip);
+        } else {
+            // 비밀번호 변경했을 경우
+            saveMemberDTO = memberService.save(memberDTO);
+        }
 
         log.info("[{}][office] member 수정 완료. {}", ip, saveMemberDTO);
 

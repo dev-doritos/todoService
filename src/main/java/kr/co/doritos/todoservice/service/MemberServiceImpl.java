@@ -6,6 +6,7 @@ import kr.co.doritos.todoservice.dto.MemberDTO;
 import kr.co.doritos.todoservice.entity.Member;
 import kr.co.doritos.todoservice.exception.TodoException;
 import kr.co.doritos.todoservice.repository.MemberRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.stream.Collectors;
 public class MemberServiceImpl implements  MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    public MemberServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -76,6 +79,9 @@ public class MemberServiceImpl implements  MemberService {
     @Override
     @Transactional
     public MemberDTO save(MemberDTO memberDTO) {
+        // 비밀번호 암호화
+        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+
         Member member = memberRepository.save(memberDTO.toEntity());
         return member.toDto();
     }
