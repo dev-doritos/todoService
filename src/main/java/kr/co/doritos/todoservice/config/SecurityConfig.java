@@ -39,6 +39,10 @@ public class SecurityConfig {
                 .successHandler(new LoginSuccessHandler())
                 .failureHandler(new LoginFailureHandler())
             .and()
+            .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+            .and()
             .build();
     }
 

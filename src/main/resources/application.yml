@@ -12,7 +12,9 @@ spring:
 
   thymeleaf:
     cache: false
+    check-template-location: true
     prefix: file:src/main/resources/templates/
+    suffix: .html
 
   datasource :
     driver-class-name : org.h2.Driver

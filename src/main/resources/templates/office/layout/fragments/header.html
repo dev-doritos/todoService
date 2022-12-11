@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="header">
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/office">TodoService</a>
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <a class="nav-link px-3" href="javascript:fnLogout();">Sign out</a>
+      </div>
+    </div>
+  </header>
+  <script th:inline="javascript">
+
+    function fnLogout() {
+
+      const willLogout = window.confirm('로그아웃 하시겠습니까?');
+      if (!willLogout) {
+        return;
+      }
+
+      location.href = '/logout';
+    }
+  </script>
+</th:block>
+</html>

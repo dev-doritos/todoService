@@ -1,75 +1,47 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="office/layout/layout">
 <head>
     <meta charset="UTF-8">
     <title>TodoService</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
-<body>
-    <!-- Header -->
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/office">TodoService</a>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+<th:block layout:fragment="content">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <tr>
+                    <th scope="col">상태</th>
+                    <td>
+                        <select name="status" class="form-select form-select-sm">
+                            <option th:each="status : ${todoStatus}" th:value="${status.code}" th:text="${status.desc}" th:selected="${status.code == todoDTO.status.code}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">기한</th>
+                    <td>
+                        <input type="date" th:value="${#temporals.createDate(todoDTO.deadline, 'yyyyMMdd')}" name="deadline" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Todo</th>
+                    <td>
+                        <textarea th:value="${todoDTO.todo}" th:text="${todoDTO.todo}" name="todo" class="form-control" style="height: 300px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-12" style="text-align: right">
+                    <button class="btn btn-primary" id="listButton">목록</button>
+                    <button class="btn btn-danger" id="updateButton">수정</button>
+                </div>
             </div>
         </div>
-    </header>
-
-    <!-- Content -->
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/office/member/list">회원 관리</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/office/todo/list">TodoList 관리</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <tr>
-                            <th scope="col">상태</th>
-                            <td>
-                                <select name="status" class="form-select form-select-sm">
-                                    <option th:each="status : ${todoStatus}" th:value="${status.code}" th:text="${status.desc}" th:selected="${status.code == todoDTO.status.code}"></option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="col">기한</th>
-                            <td>
-                                <input type="date" th:value="${#temporals.createDate(todoDTO.deadline, 'yyyyMMdd')}" name="deadline" class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="col">Todo</th>
-                            <td>
-                                <textarea th:value="${todoDTO.todo}" th:text="${todoDTO.todo}" name="todo" class="form-control" style="height: 300px;"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: right">
-                            <button class="btn btn-primary" id="listButton">목록</button>
-                            <button class="btn btn-danger" id="updateButton">수정</button>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
+    </main>
 
     <script th:src="@{/js/todoService.js}"></script>
     <script th:inline="javascript">
@@ -84,5 +56,5 @@
         updateButton.addEventListener('click', fnUpdate);
 
     </script>
-</body>
+</th:block>
 </html>

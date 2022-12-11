@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoService</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<!-- header -->
+<th:block th:replace="office/layout/fragments/header"></th:block>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- nav -->
+        <th:block th:replace="office/layout/fragments/nav"></th:block>
+
+        <!-- content -->
+        <th:block layout:fragment="content"></th:block>
+    </div>
+</div>
+</body>
+</html>

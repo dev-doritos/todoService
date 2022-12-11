@@ -25,6 +25,7 @@ dependencies {
     implementation 'org.webjars:bootstrap:5.2.2'
     implementation 'org.webjars:webjars-locator:0.45'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     implementation 'org.json:json:20211205'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
