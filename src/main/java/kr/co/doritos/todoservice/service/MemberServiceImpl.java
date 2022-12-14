@@ -6,6 +6,11 @@ import kr.co.doritos.todoservice.dto.MemberDTO;
 import kr.co.doritos.todoservice.entity.Member;
 import kr.co.doritos.todoservice.exception.TodoException;
 import kr.co.doritos.todoservice.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -14,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class MemberServiceImpl implements  MemberService {
 
     private final MemberRepository memberRepository;
@@ -22,6 +28,21 @@ public class MemberServiceImpl implements  MemberService {
     public MemberServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        log.info("[CustomUserDetailsService] email={}", email);
+
+        Member member = memberRepository.findByEmail(email).get();
+
+        if (member == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        // Use 정보 설정(이름, 비밀번호, 권한)
+        return new User(member.getEmail(), member.getPassword(), AuthorityUtils.createAuthorityList(member.getUserRole().getRole()));
     }
 
     @Override
