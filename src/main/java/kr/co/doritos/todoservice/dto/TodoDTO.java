@@ -1,7 +1,6 @@
 package kr.co.doritos.todoservice.dto;
 
 import kr.co.doritos.todoservice.common.TodoStatus;
-import kr.co.doritos.todoservice.entity.Member;
 import kr.co.doritos.todoservice.entity.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class TodoDTO {
     public Todo toEntity() {
         return Todo.builder()
                 .id(this.id)
-                .todo(this.todo)
+                .content(this.todo)
                 .status(this.status)
                 .deadline(this.deadline)
                 .member(this.member.toEntity())

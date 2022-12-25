@@ -7,6 +7,9 @@ import kr.co.doritos.todoservice.dto.TodoDTO;
 import kr.co.doritos.todoservice.entity.Todo;
 import kr.co.doritos.todoservice.exception.TodoException;
 import kr.co.doritos.todoservice.repository.TodoRepository;
+import kr.co.doritos.todoservice.repository.TodoSearchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +18,12 @@ import java.util.stream.Collectors;
 public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
+    private final TodoSearchRepository todoSearchRepository;
 
-    public TodoServiceImpl(TodoRepository todoRepository) {
+    @Autowired
+    public TodoServiceImpl(TodoRepository todoRepository, TodoSearchRepository todoSearchRepository) {
         this.todoRepository = todoRepository;
+        this.todoSearchRepository = todoSearchRepository;
     }
     
     @Override
@@ -74,4 +80,10 @@ public class TodoServiceImpl implements TodoService {
                 .map(Todo::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TodoDTO> searchAll(Pageable pageable) {
+        return toMemberDTOList(todoSearchRepository.searchAll(pageable));
+    }
+
 }

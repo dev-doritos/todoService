@@ -3,7 +3,7 @@ package kr.co.doritos.todoservice.service;
 import kr.co.doritos.todoservice.common.TodoStatus;
 import kr.co.doritos.todoservice.dto.MemberDTO;
 import kr.co.doritos.todoservice.dto.TodoDTO;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface TodoService {
@@ -16,6 +16,6 @@ public interface TodoService {
     public TodoDTO save(TodoDTO todoDTO);
     public TodoDTO update(TodoDTO todoDTO);
     public void deleteById(long id);
-
     public boolean existsById(long id);
+    public List<TodoDTO> searchAll(Pageable pageable);
 }

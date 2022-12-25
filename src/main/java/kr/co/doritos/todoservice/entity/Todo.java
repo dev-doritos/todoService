@@ -18,7 +18,7 @@ public class Todo {
     private long id;
 
     @Column(length = 4000)
-    private String todo;
+    private String content;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10, nullable = false)
@@ -34,7 +34,7 @@ public class Todo {
     public TodoDTO toDTO() {
         return TodoDTO.builder()
                 .id(this.id)
-                .todo(this.todo)
+                .todo(this.content)
                 .status(this.status)
                 .deadline(this.deadline)
                 .member(this.member.toDto())

@@ -2,13 +2,9 @@ package kr.co.doritos.todoservice.repository;
 
 import kr.co.doritos.todoservice.common.UseStatus;
 import kr.co.doritos.todoservice.entity.Member;
-import kr.co.doritos.todoservice.entity.Todo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
